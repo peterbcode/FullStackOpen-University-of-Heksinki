@@ -1,0 +1,41 @@
+title Peter's New Note (Corrected Sequence)
+
+participant Browser
+participant Server
+
+== User submits new note ==
+
+Browser -> Server: POST /exampleapp/notes
+activate Server
+Server --> Browser: 302 Found (Location: /exampleapp/notes)
+deactivate Server
+
+== Browser follows redirect ==
+
+Browser -> Server: GET /exampleapp/notes
+activate Server
+Server --> Browser: 200 OK (HTML)
+deactivate Server
+
+== Browser loads static assets ==
+
+Browser -> Server: GET /exampleapp/main.css
+activate Server
+Server --> Browser: 200 OK (CSS)
+deactivate Server
+
+Browser -> Server: GET /exampleapp/main.js
+activate Server
+Server --> Browser: 200 OK (JS)
+deactivate Server
+
+== Browser executes JavaScript ==
+
+Note right of Browser: JS runs after main.js loads
+
+Browser -> Server: GET /exampleapp/data.json
+activate Server
+Server --> Browser: 200 OK (JSON)
+deactivate Server
+
+Note right of Browser: Notes rendered from JSON
