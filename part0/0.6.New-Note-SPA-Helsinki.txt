@@ -1,0 +1,49 @@
+title Peter's New Note SPA
+
+participant Browser
+participant Server
+
+== Initial page load ==
+
+Browser -> Server: GET /exampleapp/notes
+activate Server
+Server --> Browser: 200 OK (HTML)
+deactivate Server
+
+Browser -> Server: GET /exampleapp/main.css
+activate Server
+Server --> Browser: 200 OK (CSS)
+deactivate Server
+
+Browser -> Server: GET /exampleapp/spa.js
+activate Server
+Server --> Browser: 200 OK (JavaScript)
+deactivate Server
+
+Browser -> Server: GET /exampleapp/js.js
+activate Server
+Server --> Browser: 200 OK (JavaScript)
+deactivate Server
+
+Browser -> Server: GET /exampleapp/dom.js
+activate Server
+Server --> Browser: 200 OK (JavaScript)
+deactivate Server
+
+== JS initializes SPA ==
+
+Note right of Browser: JS executes and fetches /data.json
+Browser -> Server: GET /exampleapp/data.json
+activate Server
+Server --> Browser: 200 OK (JSON)
+deactivate Server
+Note right of Browser: Existing notes rendered in DOM
+
+== User submits new note ==
+
+Browser -> Server: POST /exampleapp/new_note_spa
+activate Server
+Server --> Browser: 201 Created (JSON)
+deactivate Server
+
+Note right of Browser: JS appends new note to DOM dynamically
